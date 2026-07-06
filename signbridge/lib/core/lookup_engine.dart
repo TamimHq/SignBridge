@@ -25,15 +25,17 @@ String bnNormalize(String text) {
 }
 
 // ── English gloss reordering rules ───────────────────────────────────────────
-const _enDrop = {
-  'a', 'an', 'the', 'is', 'are', 'am', 'was', 'were'
-};
+const _enDrop = {'a', 'an', 'the', 'is', 'are', 'am', 'was', 'were'};
 const _timeWords = {
-  'today', 'yesterday', 'tomorrow', 'now', 'later', 'before', 'after'
+  'today',
+  'yesterday',
+  'tomorrow',
+  'now',
+  'later',
+  'before',
+  'after',
 };
-const _questionWords = {
-  'what', 'where', 'when', 'who', 'why', 'how'
-};
+const _questionWords = {'what', 'where', 'when', 'who', 'why', 'how'};
 
 List<String> reorderGlossEn(List<String> words) {
   if (words.length <= 2) return words;
@@ -60,11 +62,23 @@ List<String> reorderGlossBn(List<String> words) {
 
 // ── Common phrases ────────────────────────────────────────────────────────────
 const _commonPhrases = {
-  'thank you', "you're welcome", 'excuse me', "i'm sorry",
-  'good morning', 'good afternoon', 'good evening', 'good night',
-  'how are you', 'nice to meet you', 'see you later',
-  'what is', 'where is', 'how much', 'how many',
-  "i don't know", 'i understand',
+  'thank you',
+  "you're welcome",
+  'excuse me',
+  "i'm sorry",
+  'good morning',
+  'good afternoon',
+  'good evening',
+  'good night',
+  'how are you',
+  'nice to meet you',
+  'see you later',
+  'what is',
+  'where is',
+  'how much',
+  'how many',
+  "i don't know",
+  'i understand',
 };
 
 // ── Main engine ───────────────────────────────────────────────────────────────
@@ -83,22 +97,28 @@ class SignLookupEngine {
   Future<void> loadIndexes() async {
     try {
       final aslJson = await rootBundle.loadString(
-          'assets/indices/asl_vocabulary_index.json');
+        'assets/indices/asl_vocabulary_index.json',
+      );
       _aslIndex = jsonDecode(aslJson) as Map<String, dynamic>;
-      debugPrint('[Engine] ASL loaded: '
-          '${_aslIndex!['total_word_types']} words, '
-          '${_aslIndex!['total_phrase_types']} phrases');
+      debugPrint(
+        '[Engine] ASL loaded: '
+        '${_aslIndex!['total_word_types']} words, '
+        '${_aslIndex!['total_phrase_types']} phrases',
+      );
     } catch (e) {
       debugPrint('[Engine] ASL index not found: $e');
     }
 
     try {
       final bdslJson = await rootBundle.loadString(
-          'assets/indices/bdsl_vocabulary_index_train.json');
+        'assets/indices/bdsl_vocabulary_index_train.json',
+      );
       _bdslIndex = jsonDecode(bdslJson) as Map<String, dynamic>;
       _buildBnNormMap();
-      debugPrint('[Engine] BdSL loaded: '
-          '${_bdslIndex!['total_glosses']} glosses');
+      debugPrint(
+        '[Engine] BdSL loaded: '
+        '${_bdslIndex!['total_glosses']} glosses',
+      );
     } catch (e) {
       debugPrint('[Engine] BdSL index not found: $e');
     }
@@ -107,8 +127,7 @@ class SignLookupEngine {
   void _buildBnNormMap() {
     final rawMap = (_bdslIndex!['bangla_to_gloss'] as Map<String, dynamic>);
     _bnNormMap = {
-      for (final e in rawMap.entries)
-        bnNormalize(e.key): e.value as String,
+      for (final e in rawMap.entries) bnNormalize(e.key): e.value as String,
     };
     // Manual correction: Sister typo in xlsx
     _bnNormMap[bnNormalize('বোন')] = 'bon';
@@ -116,9 +135,7 @@ class SignLookupEngine {
 
   // ── Public lookup ────────────────────────────────────────────────────────────
   LookupResult lookup(String text, AppLanguage language) {
-    return language == AppLanguage.aslEn
-        ? _lookupAsl(text)
-        : _lookupBdsl(text);
+    return language == AppLanguage.aslEn ? _lookupAsl(text) : _lookupBdsl(text);
   }
 
   // ── ASL / English ────────────────────────────────────────────────────────────
@@ -163,23 +180,27 @@ class SignLookupEngine {
         final sub = _buildFingerspellClips(w, fsIndex, AppLanguage.aslEn);
         if (sub.isNotEmpty) {
           fspell.add(w);
-          clips.add(PlaybackClip(
-            word: w,
-            clipType: ClipType.fingerspell,
-            dataSource: 'fingerspell',
-            durationEstimateS: w.length * 0.4,
-            language: AppLanguage.aslEn,
-            letters: w.split(''),
-            subClips: sub,
-          ));
+          clips.add(
+            PlaybackClip(
+              word: w,
+              clipType: ClipType.fingerspell,
+              dataSource: 'fingerspell',
+              durationEstimateS: w.length * 0.4,
+              language: AppLanguage.aslEn,
+              letters: w.split(''),
+              subClips: sub,
+            ),
+          );
         } else {
           oov.add(w);
-          clips.add(PlaybackClip(
-            word: w,
-            clipType: ClipType.skip,
-            dataSource: 'none',
-            language: AppLanguage.aslEn,
-          ));
+          clips.add(
+            PlaybackClip(
+              word: w,
+              clipType: ClipType.skip,
+              dataSource: 'none',
+              language: AppLanguage.aslEn,
+            ),
+          );
         }
       }
       i++;
@@ -206,8 +227,7 @@ class SignLookupEngine {
 
     final enMap =
         _bdslIndex?['english_to_gloss'] as Map<String, dynamic>? ?? {};
-    final glosses =
-        _bdslIndex?['glosses'] as Map<String, dynamic>? ?? {};
+    final glosses = _bdslIndex?['glosses'] as Map<String, dynamic>? ?? {};
 
     for (final w in gloss) {
       // Bengali lookup with normalization
@@ -220,12 +240,14 @@ class SignLookupEngine {
         clips.add(_buildBdslClip(w, glossKey, entry));
       } else {
         oov.add(w);
-        clips.add(PlaybackClip(
-          word: w,
-          clipType: ClipType.skip,
-          dataSource: 'none',
-          language: AppLanguage.bdslBn,
-        ));
+        clips.add(
+          PlaybackClip(
+            word: w,
+            clipType: ClipType.skip,
+            dataSource: 'none',
+            language: AppLanguage.bdslBn,
+          ),
+        );
       }
     }
 
@@ -241,8 +263,11 @@ class SignLookupEngine {
   }
 
   // ── Clip builders ────────────────────────────────────────────────────────────
-  PlaybackClip _buildAslClip(String word, Map<String, dynamic> entry,
-      {bool isPhrase = false}) {
+  PlaybackClip _buildAslClip(
+    String word,
+    Map<String, dynamic> entry, {
+    bool isPhrase = false,
+  }) {
     // Must match Python's re.sub(r'[^a-z0-9]', '_', word) exactly so the
     // asset filename lines up with what convert_npy_to_json.py generated.
     final safeKey = word.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '_');
@@ -253,7 +278,8 @@ class SignLookupEngine {
       word: word,
       clipType: ClipType.exact,
       dataSource: entry['data_source'] as String? ?? 'how2sign',
-      keypointNpyPath: assetPath, // now an asset path, loaded async before playback
+      keypointNpyPath:
+          assetPath, // now an asset path, loaded async before playback
       frameCount: 0,
       durationEstimateS: (entry['duration_s'] as num?)?.toDouble() ?? 1.2,
       language: AppLanguage.aslEn,
@@ -261,7 +287,10 @@ class SignLookupEngine {
   }
 
   PlaybackClip _buildBdslClip(
-      String word, String glossKey, Map<String, dynamic> entry) {
+    String word,
+    String glossKey,
+    Map<String, dynamic> entry,
+  ) {
     final folder = entry['bodypose_folder'] as String? ?? '';
     final frameCount = (entry['frame_count'] as num?)?.toInt() ?? 30;
 
@@ -285,19 +314,23 @@ class SignLookupEngine {
   }
 
   List<PlaybackClip> _buildFingerspellClips(
-      String word, Map<String, dynamic> fsIndex, AppLanguage lang) {
+    String word,
+    Map<String, dynamic> fsIndex,
+    AppLanguage lang,
+  ) {
     final result = <PlaybackClip>[];
     for (final letter in word.toLowerCase().split('')) {
       if (fsIndex.containsKey(letter)) {
-        result.add(PlaybackClip(
-          word: letter,
-          clipType: ClipType.fingerspell,
-          dataSource: 'fingerspell',
-          keypointNpyPath:
-          fsIndex[letter]?['keypoint_npy_path'] as String?,
-          durationEstimateS: 0.4,
-          language: lang,
-        ));
+        result.add(
+          PlaybackClip(
+            word: letter,
+            clipType: ClipType.fingerspell,
+            dataSource: 'fingerspell',
+            keypointNpyPath: fsIndex[letter]?['keypoint_npy_path'] as String?,
+            durationEstimateS: 0.4,
+            language: lang,
+          ),
+        );
       }
     }
     return result;
@@ -327,12 +360,10 @@ class SignLookupEngine {
   Map<String, dynamic> get stats => {
     'asl_en': aslLoaded
         ? {
-      'words': _aslIndex!['total_word_types'],
-      'phrases': _aslIndex!['total_phrase_types'],
-    }
+            'words': _aslIndex!['total_word_types'],
+            'phrases': _aslIndex!['total_phrase_types'],
+          }
         : null,
-    'bdsl_bn': bdslLoaded
-        ? {'glosses': _bdslIndex!['total_glosses']}
-        : null,
+    'bdsl_bn': bdslLoaded ? {'glosses': _bdslIndex!['total_glosses']} : null,
   };
 }

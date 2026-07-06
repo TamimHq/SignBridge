@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:camera/camera.dart';
 import '../../shared/theme/app_theme.dart';
-import '../chat/chat_controller.dart';
-
+import '../features/chat/chat_controller.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 // Signer Panel
 // Shows live camera feed + skeleton overlay + current sign prediction
@@ -37,7 +36,7 @@ class _SignerPanelState extends State<SignerPanel> {
 
       // Prefer front camera
       final cam = cameras.firstWhere(
-            (c) => c.lensDirection == CameraLensDirection.front,
+        (c) => c.lensDirection == CameraLensDirection.front,
         orElse: () => cameras.first,
       );
 
@@ -83,8 +82,7 @@ class _SignerPanelState extends State<SignerPanel> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Section label
-          Text('Signer Camera',
-              style: Theme.of(context).textTheme.labelSmall),
+          Text('Signer Camera', style: Theme.of(context).textTheme.labelSmall),
           const SizedBox(height: 8),
 
           // Camera feed
@@ -100,10 +98,13 @@ class _SignerPanelState extends State<SignerPanel> {
 
                   // LIVE badge
                   Positioned(
-                    top: 8, left: 8,
+                    top: 8,
+                    left: 8,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 7, vertical: 3),
+                        horizontal: 7,
+                        vertical: 3,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.red.withOpacity(0.85),
                         borderRadius: BorderRadius.circular(5),
@@ -113,12 +114,15 @@ class _SignerPanelState extends State<SignerPanel> {
                         children: [
                           _PulsingDot(color: Colors.white),
                           SizedBox(width: 4),
-                          Text('LIVE',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 0.5)),
+                          Text(
+                            'LIVE',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -158,15 +162,17 @@ class _SignerPanelState extends State<SignerPanel> {
               backgroundColor: AppColors.accent,
               disabledBackgroundColor: AppColors.border,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                borderRadius: BorderRadius.circular(10),
+              ),
               padding: const EdgeInsets.symmetric(vertical: 11),
             ),
             child: const Text(
               'Send to Chat',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500),
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
 
@@ -175,11 +181,12 @@ class _SignerPanelState extends State<SignerPanel> {
           // Server connection note
           const Text(
             'Sign recognition requires FastAPI server\n'
-                'connection (local or cloud)',
+            'connection (local or cloud)',
             style: TextStyle(
-                fontSize: 10,
-                color: AppColors.textThird,
-                height: 1.4),
+              fontSize: 10,
+              color: AppColors.textThird,
+              height: 1.4,
+            ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -195,17 +202,28 @@ class _SignerPanelState extends State<SignerPanel> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.videocam_off_rounded,
-                  color: AppColors.textThird, size: 36),
+              const Icon(
+                Icons.videocam_off_rounded,
+                color: AppColors.textThird,
+                size: 36,
+              ),
               const SizedBox(height: 8),
-              Text('Camera unavailable',
-                  style: const TextStyle(
-                      color: AppColors.textThird, fontSize: 12)),
+              Text(
+                'Camera unavailable',
+                style: const TextStyle(
+                  color: AppColors.textThird,
+                  fontSize: 12,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text(_cameraError!,
-                  style: const TextStyle(
-                      color: AppColors.textThird, fontSize: 10),
-                  textAlign: TextAlign.center),
+              Text(
+                _cameraError!,
+                style: const TextStyle(
+                  color: AppColors.textThird,
+                  fontSize: 10,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
@@ -217,7 +235,9 @@ class _SignerPanelState extends State<SignerPanel> {
         color: AppColors.signerBg,
         child: const Center(
           child: CircularProgressIndicator(
-              color: AppColors.accent, strokeWidth: 1.5),
+            color: AppColors.accent,
+            strokeWidth: 1.5,
+          ),
         ),
       );
     }
@@ -244,8 +264,10 @@ class _PredictionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('Recognized Sign',
-              style: Theme.of(context).textTheme.labelSmall),
+          Text(
+            'Recognized Sign',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
           const SizedBox(height: 4),
           Text(
             word ?? '—',
@@ -258,8 +280,7 @@ class _PredictionCard extends StatelessWidget {
           if (word != null)
             Text(
               'Confidence: ${(confidence * 100).toStringAsFixed(0)}%',
-              style: const TextStyle(
-                  fontSize: 10, color: AppColors.textThird),
+              style: const TextStyle(fontSize: 10, color: AppColors.textThird),
             ),
         ],
       ),
@@ -284,8 +305,9 @@ class _PulsingDotState extends State<_PulsingDot>
   void initState() {
     super.initState();
     _ctrl = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1000))
-      ..repeat(reverse: true);
+      vsync: this,
+      duration: const Duration(milliseconds: 1000),
+    )..repeat(reverse: true);
     _anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut);
   }
 
@@ -302,9 +324,12 @@ class _PulsingDotState extends State<_PulsingDot>
       builder: (_, __) => Opacity(
         opacity: 0.4 + _anim.value * 0.6,
         child: Container(
-          width: 5, height: 5,
+          width: 5,
+          height: 5,
           decoration: BoxDecoration(
-              color: widget.color, shape: BoxShape.circle),
+            color: widget.color,
+            shape: BoxShape.circle,
+          ),
         ),
       ),
     );

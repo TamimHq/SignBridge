@@ -6,7 +6,7 @@ import '../avatar/avatar_widget.dart';
 import 'chat_controller.dart';
 import 'chat_panel.dart';
 import 'input_bar.dart';
-
+import '../../signer/signer_panel.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Main Screen
