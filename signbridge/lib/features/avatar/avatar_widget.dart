@@ -1,4 +1,6 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:provider/provider.dart';
 import '../../core/models.dart';
 import '../../shared/theme/app_theme.dart';
@@ -122,24 +124,60 @@ class _AvatarWidgetState extends State<AvatarWidget>
 }
 
 // ── PNG Frame Display ─────────────────────────────────────────────────────────
+// Simple in-memory cache: asset path → decoded bytes.
+// PNG frames get requested repeatedly (10fps playback), so we load each once.
+final Map<String, Uint8List> _pngByteCache = {};
+
 class _PngFrameDisplay extends StatelessWidget {
   final String assetPath;
   const _PngFrameDisplay({required this.assetPath});
+
+  Future<Uint8List> _loadBytes() async {
+    final cached = _pngByteCache[assetPath];
+    if (cached != null) return cached;
+    final data = await rootBundle.load(assetPath);
+    final bytes = data.buffer.asUint8List();
+    _pngByteCache[assetPath] = bytes;
+    return bytes;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: const Color(0xFF0A0C14),
-      child: Image.asset(
-        assetPath,
-        fit: BoxFit.contain,
-        errorBuilder: (_, __, ___) => const Center(
-          child: Icon(
-            Icons.person_outline,
-            color: AppColors.textThird,
-            size: 40,
-          ),
-        ),
+      child: FutureBuilder<Uint8List>(
+        // Load through rootBundle (same mechanism as the working ASL JSON).
+        // This avoids the Flutter Web 'assets/assets/' double-prepend bug that
+        // Image.asset() triggers.
+        future: _loadBytes(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Image.memory(
+              snapshot.data!,
+              fit: BoxFit.contain,
+              gaplessPlayback: true,
+              filterQuality: FilterQuality.medium,
+              errorBuilder: (_, __, ___) => const Center(
+                child: Icon(
+                  Icons.person_outline,
+                  color: AppColors.textThird,
+                  size: 40,
+                ),
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            return const Center(
+              child: Icon(
+                Icons.person_outline,
+                color: AppColors.textThird,
+                size: 40,
+              ),
+            );
+          }
+          // Loading — keep dark background, no spinner (frames load fast)
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
@@ -205,7 +243,7 @@ class _QueuePanel extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             itemCount: allClips.length > 8 ? 8 : allClips.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 4),
+            separatorBuilder: (_, _) => const SizedBox(height: 4),
             itemBuilder: (context, i) {
               final clip = allClips[i];
               final isPlaying = i == playingIdx;

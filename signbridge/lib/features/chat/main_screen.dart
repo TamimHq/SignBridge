@@ -22,15 +22,17 @@ class MainScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.bg,
-      body: Column(
-        children: [
-          // ── Top bar ─────────────────────────────────────────────────────
-          const _TopBar(),
-          const Divider(height: 1, color: AppColors.border),
-
-          // ── Main body ───────────────────────────────────────────────────
-          Expanded(child: isWide ? const _WideLayout() : const _NarrowLayout()),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            // ── Top bar ─────────────────────────────────────────────────────
+            const _TopBar(),
+            const Divider(height: 1, color: AppColors.border),
+        
+            // ── Main body ───────────────────────────────────────────────────
+            Expanded(child: isWide ? const _WideLayout() : const _NarrowLayout()),
+          ],
+        ),
       ),
     );
   }

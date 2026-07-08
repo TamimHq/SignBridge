@@ -18,7 +18,7 @@ enum ClipType { exact, fingerspell, skip }
 class PlaybackClip {
   final String word;
   final ClipType clipType;
-  final String dataSource;       // 'how2sign' | 'signbd_word' | 'fingerspell'
+  final String dataSource; // 'how2sign' | 'signbd_word' | 'fingerspell'
 
   /// For ASL: path to .npy keypoint file (served by FastAPI or bundled)
   final String? keypointNpyPath;
@@ -105,8 +105,8 @@ class ChatMessage {
     required this.language,
     DateTime? timestamp,
     this.isNew = false,
-  })  : id = DateTime.now().millisecondsSinceEpoch.toString(),
-        timestamp = timestamp ?? DateTime.now();
+  }) : id = DateTime.now().millisecondsSinceEpoch.toString(),
+       timestamp = timestamp ?? DateTime.now();
 
   String get timeLabel {
     final h = timestamp.hour.toString().padLeft(2, '0');
@@ -115,9 +115,9 @@ class ChatMessage {
   }
 
   String get sourceLabel => switch (source) {
-    MessageSource.signer  => '✋ Signer',
+    MessageSource.signer => '✋ Signer',
     MessageSource.speaker => 'Speaker 🎙',
-    MessageSource.system  => 'System',
+    MessageSource.system => 'System',
   };
 }
 

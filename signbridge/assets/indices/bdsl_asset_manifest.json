@@ -1,0 +1,987 @@
+{
+  "aam": {
+    "frame_count": 30,
+    "english": "Mango",
+    "bangla": "আম"
+  },
+  "aangti": {
+    "frame_count": 30,
+    "english": "Ring",
+    "bangla": "আংটি"
+  },
+  "aat": {
+    "frame_count": 30,
+    "english": "8",
+    "bangla": "8"
+  },
+  "abhawa": {
+    "frame_count": 30,
+    "english": "Weather",
+    "bangla": "আবহাওয়া"
+  },
+  "ador": {
+    "frame_count": 30,
+    "english": "Care",
+    "bangla": "আদর"
+  },
+  "agun": {
+    "frame_count": 30,
+    "english": "Fire",
+    "bangla": "আগুন"
+  },
+  "akash": {
+    "frame_count": 30,
+    "english": "Sky",
+    "bangla": "আকাশ"
+  },
+  "alo": {
+    "frame_count": 30,
+    "english": "Light",
+    "bangla": "আলো"
+  },
+  "amader": {
+    "frame_count": 30,
+    "english": "Ours",
+    "bangla": "আমাদের"
+  },
+  "amar": {
+    "frame_count": 30,
+    "english": "My",
+    "bangla": "আমার"
+  },
+  "ami": {
+    "frame_count": 30,
+    "english": "I",
+    "bangla": "আমি"
+  },
+  "amra": {
+    "frame_count": 30,
+    "english": "We",
+    "bangla": "আমরা"
+  },
+  "apnader": {
+    "frame_count": 30,
+    "english": "Yours",
+    "bangla": "আপনাদের//তোমাদের"
+  },
+  "apnara": {
+    "frame_count": 30,
+    "english": "You (plural)",
+    "bangla": "আপনারা/তোমরা"
+  },
+  "apni": {
+    "frame_count": 30,
+    "english": "You (singular)",
+    "bangla": "আপনি/তুমি"
+  },
+  "attio": {
+    "frame_count": 30,
+    "english": "Relative",
+    "bangla": "আত্মীয়"
+  },
+  "baari": {
+    "frame_count": 30,
+    "english": "House",
+    "bangla": "বাড়ি"
+  },
+  "baba": {
+    "frame_count": 30,
+    "english": "Father",
+    "bangla": "বাবা"
+  },
+  "bagan": {
+    "frame_count": 30,
+    "english": "Garden",
+    "bangla": "বাগান"
+  },
+  "bah": {
+    "frame_count": 30,
+    "english": "Wow",
+    "bangla": "বাহ"
+  },
+  "bangladesh": {
+    "frame_count": 30,
+    "english": "Bangladesh",
+    "bangla": "বাংলাদেশ"
+  },
+  "batash": {
+    "frame_count": 30,
+    "english": "Wind",
+    "bangla": "বাতাস"
+  },
+  "bathroom": {
+    "frame_count": 30,
+    "english": "Bathroom",
+    "bangla": "বাথরুম"
+  },
+  "bhai": {
+    "frame_count": 30,
+    "english": "Brother",
+    "bangla": "ভাই"
+  },
+  "bhul": {
+    "frame_count": 30,
+    "english": "Wrong",
+    "bangla": "ভুল"
+  },
+  "bichana": {
+    "frame_count": 30,
+    "english": "Bed",
+    "bangla": "বিছানা"
+  },
+  "boi": {
+    "frame_count": 30,
+    "english": "Book",
+    "bangla": "বই"
+  },
+  "boka": {
+    "frame_count": 30,
+    "english": "Fool",
+    "bangla": "বোকা"
+  },
+  "bon": {
+    "frame_count": 30,
+    "english": "Sister",
+    "bangla": "বাোন"
+  },
+  "bondhu": {
+    "frame_count": 30,
+    "english": "Friend",
+    "bangla": "বন্ধু/বান্ধবী"
+  },
+  "boro": {
+    "frame_count": 30,
+    "english": "Big",
+    "bangla": "বড়"
+  },
+  "bristi": {
+    "frame_count": 30,
+    "english": "Rain",
+    "bangla": "বৃস্টি"
+  },
+  "budhbar": {
+    "frame_count": 30,
+    "english": "Wednesday",
+    "bangla": "বুধবার"
+  },
+  "chabi": {
+    "frame_count": 30,
+    "english": "Key",
+    "bangla": "চাবি"
+  },
+  "chacha": {
+    "frame_count": 30,
+    "english": "Uncle",
+    "bangla": "চাচা"
+  },
+  "chachi": {
+    "frame_count": 30,
+    "english": "Aunti",
+    "bangla": "চাাচী"
+  },
+  "chad": {
+    "frame_count": 30,
+    "english": "Moon",
+    "bangla": "চাঁদ"
+  },
+  "chagol": {
+    "frame_count": 30,
+    "english": "Goat",
+    "bangla": "ছাগল"
+  },
+  "chair": {
+    "frame_count": 30,
+    "english": "Chair",
+    "bangla": "চেয়ার"
+  },
+  "chalak": {
+    "frame_count": 30,
+    "english": "Clever",
+    "bangla": "চালাক"
+  },
+  "char": {
+    "frame_count": 30,
+    "english": "4",
+    "bangla": "4"
+  },
+  "chata": {
+    "frame_count": 30,
+    "english": "Umbrella",
+    "bangla": "ছাতা"
+  },
+  "chesta": {
+    "frame_count": 30,
+    "english": "Try",
+    "bangla": "চেস্টা"
+  },
+  "chih": {
+    "frame_count": 30,
+    "english": "Shame",
+    "bangla": "ছি"
+  },
+  "chikitsha": {
+    "frame_count": 30,
+    "english": "Treatment",
+    "bangla": "চিকিৎসা"
+  },
+  "chinta": {
+    "frame_count": 30,
+    "english": "Think",
+    "bangla": "চিন্তা করা"
+  },
+  "chocolate": {
+    "frame_count": 30,
+    "english": "Chocolate",
+    "bangla": "চকলেট"
+  },
+  "chosma": {
+    "frame_count": 30,
+    "english": "Eyeglass",
+    "bangla": "চশমা"
+  },
+  "choto": {
+    "frame_count": 30,
+    "english": "Small",
+    "bangla": "ছোট"
+  },
+  "choy": {
+    "frame_count": 30,
+    "english": "6",
+    "bangla": "6"
+  },
+  "chup": {
+    "frame_count": 30,
+    "english": "Shut-up",
+    "bangla": "চুপ"
+  },
+  "cricket": {
+    "frame_count": 30,
+    "english": "Cricket",
+    "bangla": "ক্রিকেট"
+  },
+  "dengue": {
+    "frame_count": 30,
+    "english": "Dengue",
+    "bangla": "ডেঙ্গু"
+  },
+  "dhoni": {
+    "frame_count": 30,
+    "english": "Rich",
+    "bangla": "ধনী"
+  },
+  "dhonnobad": {
+    "frame_count": 30,
+    "english": "Thanks",
+    "bangla": "ধন্যবাদ"
+  },
+  "dhorjo": {
+    "frame_count": 30,
+    "english": "Patience",
+    "bangla": "ধৈর্য্য"
+  },
+  "din": {
+    "frame_count": 30,
+    "english": "Day",
+    "bangla": "দিন"
+  },
+  "diye": {
+    "frame_count": 30,
+    "english": "Via",
+    "bangla": "দিয়ে"
+  },
+  "doctor": {
+    "frame_count": 30,
+    "english": "Doctor",
+    "bangla": "ডাক্তার"
+  },
+  "dorja": {
+    "frame_count": 30,
+    "english": "Door",
+    "bangla": "দরজা"
+  },
+  "dorshok": {
+    "frame_count": 30,
+    "english": "Spectator",
+    "bangla": "দর্শক"
+  },
+  "dos": {
+    "frame_count": 30,
+    "english": "10",
+    "bangla": "10"
+  },
+  "dosh": {
+    "frame_count": 30,
+    "english": "Fault",
+    "bangla": "দোষ"
+  },
+  "doya": {
+    "frame_count": 30,
+    "english": "Please",
+    "bangla": "দয়া"
+  },
+  "dudh": {
+    "frame_count": 30,
+    "english": "Milk",
+    "bangla": "দুধ"
+  },
+  "dui": {
+    "frame_count": 30,
+    "english": "2",
+    "bangla": "2"
+  },
+  "dukkhito": {
+    "frame_count": 30,
+    "english": "Sorry",
+    "bangla": "দুঃখিত"
+  },
+  "durbol": {
+    "frame_count": 30,
+    "english": "Weak",
+    "bangla": "দুর্বল"
+  },
+  "dustu": {
+    "frame_count": 30,
+    "english": "Naughty",
+    "bangla": "দুষ্টু"
+  },
+  "ebong": {
+    "frame_count": 30,
+    "english": "And",
+    "bangla": "এবং"
+  },
+  "ek": {
+    "frame_count": 30,
+    "english": "1",
+    "bangla": "1"
+  },
+  "ekhane": {
+    "frame_count": 30,
+    "english": "Here",
+    "bangla": "এখানে"
+  },
+  "ekhon": {
+    "frame_count": 30,
+    "english": "Now",
+    "bangla": "এখন"
+  },
+  "football": {
+    "frame_count": 30,
+    "english": "Football",
+    "bangla": "ফুটবল"
+  },
+  "ful": {
+    "frame_count": 30,
+    "english": "Flower",
+    "bangla": "ফুল"
+  },
+  "gach": {
+    "frame_count": 30,
+    "english": "Tree",
+    "bangla": "গাছ"
+  },
+  "ghori": {
+    "frame_count": 30,
+    "english": "Watch",
+    "bangla": "ঘড়ি"
+  },
+  "glass": {
+    "frame_count": 30,
+    "english": "Glass",
+    "bangla": "গ্লাস"
+  },
+  "golarhaar": {
+    "frame_count": 30,
+    "english": "Necklace",
+    "bangla": "গলার হার"
+  },
+  "gopon": {
+    "frame_count": 30,
+    "english": "Secret",
+    "bangla": "গোপন"
+  },
+  "gorib": {
+    "frame_count": 30,
+    "english": "Poor",
+    "bangla": "গরিব"
+  },
+  "goru": {
+    "frame_count": 30,
+    "english": "Cow",
+    "bangla": "গরু"
+  },
+  "hash": {
+    "frame_count": 30,
+    "english": "Duck",
+    "bangla": "হাঁস"
+  },
+  "hata": {
+    "frame_count": 30,
+    "english": "Walk",
+    "bangla": "হাঁটা"
+  },
+  "hospital": {
+    "frame_count": 30,
+    "english": "Hospital",
+    "bangla": "হাসপাতাল"
+  },
+  "hridrog": {
+    "frame_count": 30,
+    "english": "Heart-disease",
+    "bangla": "হৃদরোগ"
+  },
+  "icecream": {
+    "frame_count": 30,
+    "english": "Icecream",
+    "bangla": "আইসক্রিম"
+  },
+  "janala": {
+    "frame_count": 30,
+    "english": "Window",
+    "bangla": "জানালা"
+  },
+  "jiggasha": {
+    "frame_count": 30,
+    "english": "Ask",
+    "bangla": "জিজ্ঞাসা"
+  },
+  "jodi": {
+    "frame_count": 30,
+    "english": "If",
+    "bangla": "যদি"
+  },
+  "jokhon": {
+    "frame_count": 30,
+    "english": "When",
+    "bangla": "যখন"
+  },
+  "jor": {
+    "frame_count": 30,
+    "english": "Fever",
+    "bangla": "জ্বর"
+  },
+  "kanna": {
+    "frame_count": 30,
+    "english": "Cry",
+    "bangla": "কান্না"
+  },
+  "kashi": {
+    "frame_count": 30,
+    "english": "Cough",
+    "bangla": "কাশি"
+  },
+  "khabar": {
+    "frame_count": 30,
+    "english": "Food",
+    "bangla": "খাবার"
+  },
+  "kharap": {
+    "frame_count": 30,
+    "english": "Bad",
+    "bangla": "খারাপ"
+  },
+  "khela": {
+    "frame_count": 30,
+    "english": "Play/sport",
+    "bangla": "খেলা"
+  },
+  "khelowar": {
+    "frame_count": 30,
+    "english": "Player",
+    "bangla": "খেলোয়াড়"
+  },
+  "khoj": {
+    "frame_count": 30,
+    "english": "Search",
+    "bangla": "খোঁজ"
+  },
+  "khushi": {
+    "frame_count": 30,
+    "english": "Happy",
+    "bangla": "খুশি"
+  },
+  "ki": {
+    "frame_count": 30,
+    "english": "What",
+    "bangla": "কী"
+  },
+  "kintu": {
+    "frame_count": 30,
+    "english": "But",
+    "bangla": "কিন্তু"
+  },
+  "konna": {
+    "frame_count": 30,
+    "english": "Daughter",
+    "bangla": "কন্যা"
+  },
+  "kothay": {
+    "frame_count": 30,
+    "english": "Where",
+    "bangla": "কোথায়"
+  },
+  "kukur": {
+    "frame_count": 30,
+    "english": "Dog",
+    "bangla": "কুকুর"
+  },
+  "lekha": {
+    "frame_count": 30,
+    "english": "Write",
+    "bangla": "লেখা"
+  },
+  "lojja": {
+    "frame_count": 30,
+    "english": "Shy",
+    "bangla": "লজ্জা"
+  },
+  "maa": {
+    "frame_count": 30,
+    "english": "Mother",
+    "bangla": "মা"
+  },
+  "mach": {
+    "frame_count": 30,
+    "english": "Fish",
+    "bangla": "মাছ"
+  },
+  "mangsho": {
+    "frame_count": 30,
+    "english": "Meat",
+    "bangla": "মাংস"
+  },
+  "mask": {
+    "frame_count": 30,
+    "english": "Mask",
+    "bangla": "মাস্ক"
+  },
+  "mathabetha": {
+    "frame_count": 30,
+    "english": "Headache",
+    "bangla": "মাথা ব্যাথা"
+  },
+  "mehman": {
+    "frame_count": 30,
+    "english": "Guest",
+    "bangla": "মেহমান"
+  },
+  "moja": {
+    "frame_count": 30,
+    "english": "Sock",
+    "bangla": "মোজা"
+  },
+  "mongolbar": {
+    "frame_count": 30,
+    "english": "Tuesday",
+    "bangla": "মঙ্গলবার"
+  },
+  "mosha": {
+    "frame_count": 30,
+    "english": "Mosquitoes",
+    "bangla": "মশা"
+  },
+  "murgi": {
+    "frame_count": 30,
+    "english": "Hen",
+    "bangla": "মুরগী"
+  },
+  "nana": {
+    "frame_count": 30,
+    "english": "Grandfather",
+    "bangla": "নানা/দাদা"
+  },
+  "nani": {
+    "frame_count": 30,
+    "english": "Grandmother",
+    "bangla": "নাানী/দাদী"
+  },
+  "nije": {
+    "frame_count": 30,
+    "english": "Self",
+    "bangla": "নিজে"
+  },
+  "nischit": {
+    "frame_count": 30,
+    "english": "Certain",
+    "bangla": "নিশ্চিত"
+  },
+  "nodi": {
+    "frame_count": 30,
+    "english": "River",
+    "bangla": "নদী"
+  },
+  "noy": {
+    "frame_count": 30,
+    "english": "9",
+    "bangla": "9"
+  },
+  "nurse": {
+    "frame_count": 30,
+    "english": "Nurse",
+    "bangla": "নার্স"
+  },
+  "olosh": {
+    "frame_count": 30,
+    "english": "Lazy",
+    "bangla": "অলস"
+  },
+  "onno": {
+    "frame_count": 30,
+    "english": "Other",
+    "bangla": "অন্য"
+  },
+  "onumoti": {
+    "frame_count": 30,
+    "english": "Permission",
+    "bangla": "অনুমতি"
+  },
+  "opoman": {
+    "frame_count": 30,
+    "english": "Insult",
+    "bangla": "অপমান"
+  },
+  "orna": {
+    "frame_count": 30,
+    "english": "Scarf",
+    "bangla": "ওড়না"
+  },
+  "osubidha": {
+    "frame_count": 30,
+    "english": "Drawback",
+    "bangla": "অসুবিধা"
+  },
+  "osudh": {
+    "frame_count": 30,
+    "english": "Medicine",
+    "bangla": "ঔষধ"
+  },
+  "ovivabok": {
+    "frame_count": 30,
+    "english": "Guardian",
+    "bangla": "অভিভাবক"
+  },
+  "ovvash": {
+    "frame_count": 30,
+    "english": "Habit",
+    "bangla": "অভ্যাষ"
+  },
+  "pach": {
+    "frame_count": 30,
+    "english": "5",
+    "bangla": "5"
+  },
+  "pakhi": {
+    "frame_count": 30,
+    "english": "Bird",
+    "bangla": "পাখি"
+  },
+  "pant": {
+    "frame_count": 30,
+    "english": "Pant",
+    "bangla": "প্যান্ট"
+  },
+  "plastic": {
+    "frame_count": 30,
+    "english": "Plastic",
+    "bangla": "প্লাস্টিক"
+  },
+  "plate": {
+    "frame_count": 30,
+    "english": "Plate",
+    "bangla": "প্লেট"
+  },
+  "pochondo": {
+    "frame_count": 30,
+    "english": "Like",
+    "bangla": "পছন্দ"
+  },
+  "pora": {
+    "frame_count": 30,
+    "english": "Read",
+    "bangla": "পড়া"
+  },
+  "poribar": {
+    "frame_count": 30,
+    "english": "Family",
+    "bangla": "পরিবার"
+  },
+  "poriskar": {
+    "frame_count": 30,
+    "english": "Clean",
+    "bangla": "পরিস্কার"
+  },
+  "porisrom": {
+    "frame_count": 30,
+    "english": "Toil",
+    "bangla": "পরিশ্রম"
+  },
+  "prosno": {
+    "frame_count": 30,
+    "english": "Question",
+    "bangla": "প্রশ্ন"
+  },
+  "protibeshi": {
+    "frame_count": 30,
+    "english": "Neighbour",
+    "bangla": "প্রতিবেশী"
+  },
+  "protibondhi": {
+    "frame_count": 30,
+    "english": "Handicapped",
+    "bangla": "প্রতিবন্ধী"
+  },
+  "protigga": {
+    "frame_count": 30,
+    "english": "Promise",
+    "bangla": "প্রতিজ্ঞা"
+  },
+  "protijogita": {
+    "frame_count": 30,
+    "english": "Competition",
+    "bangla": "প্রতিযোগিতা"
+  },
+  "purush": {
+    "frame_count": 30,
+    "english": "Men",
+    "bangla": "পুরুষ"
+  },
+  "putro": {
+    "frame_count": 30,
+    "english": "Son",
+    "bangla": "পুত্র"
+  },
+  "raag": {
+    "frame_count": 30,
+    "english": "Angry",
+    "bangla": "রাগ"
+  },
+  "raat": {
+    "frame_count": 30,
+    "english": "Night",
+    "bangla": "রাত"
+  },
+  "robibar": {
+    "frame_count": 30,
+    "english": "Sunday",
+    "bangla": "রবিবার"
+  },
+  "rupa": {
+    "frame_count": 30,
+    "english": "Silver",
+    "bangla": "রুপা"
+  },
+  "saat": {
+    "frame_count": 30,
+    "english": "7",
+    "bangla": "7"
+  },
+  "sahajjo": {
+    "frame_count": 30,
+    "english": "Help",
+    "bangla": "সাহায্য"
+  },
+  "sajano": {
+    "frame_count": 30,
+    "english": "Organized",
+    "bangla": "সাজানো"
+  },
+  "sandal": {
+    "frame_count": 30,
+    "english": "Sandal",
+    "bangla": "স্যান্ডেল"
+  },
+  "school": {
+    "frame_count": 30,
+    "english": "School",
+    "bangla": "স্কুল"
+  },
+  "se": {
+    "frame_count": 30,
+    "english": "He",
+    "bangla": "সে"
+  },
+  "shami": {
+    "frame_count": 30,
+    "english": "Husband",
+    "bangla": "স্বামী"
+  },
+  "shanti": {
+    "frame_count": 30,
+    "english": "Peace",
+    "bangla": "শান্তি"
+  },
+  "sharee": {
+    "frame_count": 30,
+    "english": "Sharee",
+    "bangla": "শাড়ী"
+  },
+  "shikkhito": {
+    "frame_count": 30,
+    "english": "Educated",
+    "bangla": "শিক্ষিত"
+  },
+  "shikkhok": {
+    "frame_count": 30,
+    "english": "Teacher",
+    "bangla": "শিক্ষক"
+  },
+  "shirt": {
+    "frame_count": 30,
+    "english": "Shirt",
+    "bangla": "শার্ট"
+  },
+  "shona": {
+    "frame_count": 30,
+    "english": "Gold",
+    "bangla": "সোনা"
+  },
+  "shunno": {
+    "frame_count": 30,
+    "english": "0",
+    "bangla": "0"
+  },
+  "soktishali": {
+    "frame_count": 30,
+    "english": "Strong",
+    "bangla": "শক্তিশালী"
+  },
+  "sombar": {
+    "frame_count": 30,
+    "english": "Monday",
+    "bangla": "সোমবার"
+  },
+  "somoy": {
+    "frame_count": 30,
+    "english": "Time",
+    "bangla": "সময়"
+  },
+  "somporko": {
+    "frame_count": 30,
+    "english": "Relation",
+    "bangla": "সম্পর্ক"
+  },
+  "somudro": {
+    "frame_count": 30,
+    "english": "Ocean",
+    "bangla": "সমুদ্র"
+  },
+  "sonibar": {
+    "frame_count": 30,
+    "english": "Saturday",
+    "bangla": "শনিবার"
+  },
+  "sotto": {
+    "frame_count": 30,
+    "english": "truth",
+    "bangla": "সত্য"
+  },
+  "sroddha": {
+    "frame_count": 30,
+    "english": "Respect",
+    "bangla": "শ্রদ্ধা"
+  },
+  "stree": {
+    "frame_count": 30,
+    "english": "Wife",
+    "bangla": "স্ত্রী"
+  },
+  "subidha": {
+    "frame_count": 30,
+    "english": "Benifit",
+    "bangla": "সুবিধা"
+  },
+  "sukrobar": {
+    "frame_count": 30,
+    "english": "Friday",
+    "bangla": "শুক্রবার"
+  },
+  "surjo": {
+    "frame_count": 30,
+    "english": "Sun",
+    "bangla": "সূর্য"
+  },
+  "sustho": {
+    "frame_count": 30,
+    "english": "Healthy",
+    "bangla": "সুস্থ"
+  },
+  "table": {
+    "frame_count": 30,
+    "english": "Table",
+    "bangla": "টেবিল"
+  },
+  "tader": {
+    "frame_count": 30,
+    "english": "Theirs",
+    "bangla": "তাদের"
+  },
+  "tara": {
+    "frame_count": 30,
+    "english": "Them",
+    "bangla": "তারা"
+  },
+  "taratari": {
+    "frame_count": 30,
+    "english": "Quick",
+    "bangla": "তাড়াতাড়ি"
+  },
+  "telephone": {
+    "frame_count": 30,
+    "english": "Telephone",
+    "bangla": "টেলিফোন"
+  },
+  "theke": {
+    "frame_count": 30,
+    "english": "From",
+    "bangla": "থেকে"
+  },
+  "tin": {
+    "frame_count": 30,
+    "english": "3",
+    "bangla": "3"
+  },
+  "tokhon": {
+    "frame_count": 30,
+    "english": "Then",
+    "bangla": "তখন"
+  },
+  "tv": {
+    "frame_count": 30,
+    "english": "Television",
+    "bangla": "টিভি"
+  },
+  "unmad": {
+    "frame_count": 30,
+    "english": "Insane",
+    "bangla": "উন্মাদ"
+  },
+  "upodesh": {
+    "frame_count": 30,
+    "english": "Advice",
+    "bangla": "উপদেশ"
+  },
+  "uttor": {
+    "frame_count": 30,
+    "english": "Answer",
+    "bangla": "উত্তর"
+  },
+  "uvoy": {
+    "frame_count": 30,
+    "english": "Both",
+    "bangla": "উভয়"
+  },
+  "valo": {
+    "frame_count": 30,
+    "english": "Good",
+    "bangla": "ভাল"
+  },
+  "valobasha": {
+    "frame_count": 30,
+    "english": "Love",
+    "bangla": "ভালবাসা"
+  },
+  "virus": {
+    "frame_count": 30,
+    "english": "Virus",
+    "bangla": "ভাইরাস"
+  }
+}

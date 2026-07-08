@@ -86,6 +86,8 @@ const _commonPhrases = {
 class SignLookupEngine {
   Map<String, dynamic>? _aslIndex;
   Map<String, dynamic>? _bdslIndex;
+  Map<String, dynamic>?
+  _bdslManifest; // real per-gloss frame counts from copy script
 
   // BdSL normalized Bengali → gloss key
   Map<String, String> _bnNormMap = {};
@@ -121,6 +123,20 @@ class SignLookupEngine {
       );
     } catch (e) {
       debugPrint('[Engine] BdSL index not found: $e');
+    }
+
+    // Load asset manifest with real frame counts (written by copy_bdsl_assets.py)
+    try {
+      final manifestJson = await rootBundle.loadString(
+        'assets/indices/bdsl_asset_manifest.json',
+      );
+      _bdslManifest = jsonDecode(manifestJson) as Map<String, dynamic>;
+      debugPrint(
+        '[Engine] BdSL asset manifest loaded: '
+        '${_bdslManifest!.length} glosses',
+      );
+    } catch (e) {
+      debugPrint('[Engine] BdSL manifest not found (using index counts): $e');
     }
   }
 
@@ -292,13 +308,22 @@ class SignLookupEngine {
     Map<String, dynamic> entry,
   ) {
     final folder = entry['bodypose_folder'] as String? ?? '';
-    final frameCount = (entry['frame_count'] as num?)?.toInt() ?? 30;
 
-    // Build PNG frame asset paths from folder
-    // Asset path format: assets/bdsl_poses/<gloss>/<filename>_<framenum>.png
+    // Use REAL frame count from asset manifest if available, else index value.
+    // This prevents 404s from requesting frames that weren't actually copied.
+    int frameCount = (entry['frame_count'] as num?)?.toInt() ?? 30;
+    final manifestEntry = _bdslManifest?[glossKey] as Map<String, dynamic>?;
+    if (manifestEntry != null && manifestEntry['frame_count'] != null) {
+      frameCount = (manifestEntry['frame_count'] as num).toInt();
+    }
+
+    // Build PNG frame asset paths.
+    // Files are FLATTENED into bdsl_poses/ with gloss in the filename,
+    // because Flutter's `- assets/bdsl_poses/` does not recurse into subfolders.
+    // Pattern: assets/bdsl_poses/<gloss>__frame_<num>.png
     final pngPaths = List.generate(frameCount, (i) {
       final num = i.toString().padLeft(6, '0');
-      return 'assets/bdsl_poses/$glossKey/frame_$num.png';
+      return 'assets/bdsl_poses/${glossKey}__frame_$num.png';
     });
 
     return PlaybackClip(

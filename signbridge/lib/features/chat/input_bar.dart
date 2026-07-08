@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../shared/theme/app_theme.dart';
 import '../../core/api_client.dart';
 import 'chat_controller.dart';
+import '../../core/models.dart';
 
 class InputBar extends StatefulWidget {
   const InputBar({super.key});
