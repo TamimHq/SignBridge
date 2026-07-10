@@ -61,7 +61,7 @@ List<String> reorderGlossBn(List<String> words) {
 }
 
 // ── Common phrases ────────────────────────────────────────────────────────────
-const _commonPhrases = {
+const commonPhrases = {
   'thank you',
   "you're welcome",
   'excuse me',
