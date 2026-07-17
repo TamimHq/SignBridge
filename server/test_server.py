@@ -1,13 +1,15 @@
 import requests
 import numpy as np
 
-# Fake 30-frame keypoint sequence (30 frames x 144 features)
-fake_keypoints = np.random.randn(30, 144).tolist()
+import requests
 
-response = requests.post(
-    "http://localhost:8000/api/recognize",
-    json={"keypoints": fake_keypoints, "language": "bdsl_bn"}
-)
+# Use a real BdSL video — you know what sign it is
+video_path = r"E:\SL\SignBD-Word\SignBD-Word_RGB\DATASET\maa\p1_c_maa.mp4"
 
-print("Status:", response.status_code)
-print("Response:", response.json())
+with open(video_path, 'rb') as f:
+    files = {'video': ('clip.mp4', f, 'video/mp4')}
+    data = {'language': 'bdsl_bn'}
+    r = requests.post("http://localhost:8000/api/recognize_video", files=files, data=data)
+
+print("Status:", r.status_code)
+print("Response:", r.json())

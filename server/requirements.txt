@@ -3,4 +3,8 @@ uvicorn[standard]==0.31.0
 torch>=2.0.0
 numpy>=1.24.0
 python-multipart==0.0.12
+# For server-side video keypoint extraction (the /api/recognize_video endpoint):
+mediapipe==0.10.14
+opencv-python>=4.8.0
+# For the mic/transcribe feature (optional — needs setuptools on Python 3.13):
 # openai-whisper==20240930

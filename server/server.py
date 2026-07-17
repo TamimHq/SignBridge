@@ -68,8 +68,7 @@ class SignModel:
             return
 
         try:
-            self.model = torch.jit.load(model_path, map_location=torch.device('cpu'))
-            self.model = torch.jit.optimize_for_inference(self.model) if hasattr(torch.jit, 'optimize_for_inference') else self.model
+            self.model = torch.jit.load(model_path, map_location=device)
             self.model.eval()
             with open(labels_path, encoding="utf-8") as f:
                 raw = json.load(f)
@@ -211,6 +210,56 @@ def recognize(req: RecognizeRequest):
         word=word,
         confidence=round(conf, 3),
         language=req.language,
+    )
+
+
+@app.post("/api/recognize_video")
+async def recognize_video(
+    video: UploadFile = File(...),
+    language: str = Form("bdsl_bn"),
+):
+    """
+    Accept a short recorded video clip of one sign, extract keypoints with
+    MediaPipe server-side, and return the predicted word.
+
+    This is the primary recognition path for the mobile app — the phone just
+    records a clip and uploads it; all ML happens here.
+    """
+    # Pick model
+    if language == "bdsl_bn":
+        model = bdsl_model
+    elif language == "asl_en":
+        model = asl_model
+    else:
+        raise HTTPException(400, f"Unknown language: {language}")
+
+    if not model.available:
+        raise HTTPException(
+            503, f"{model.name} model not loaded. Place the .pt in {MODEL_DIR}/"
+        )
+
+    # Save uploaded video to a temp file
+    import tempfile
+    suffix = os.path.splitext(video.filename or "clip.mp4")[1] or ".mp4"
+    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
+        content = await video.read()
+        tmp.write(content)
+        tmp_path = tmp.name
+
+    try:
+        from keypoint_extractor import extract_from_video
+        keypoints = extract_from_video(tmp_path)   # (30, 144)
+        gloss, conf = model.predict(keypoints)
+    except Exception as e:
+        raise HTTPException(500, f"Video recognition failed: {e}")
+    finally:
+        os.unlink(tmp_path)
+
+    word = gloss if conf >= CONFIDENCE_THRESHOLD else "…"
+    return RecognizeResponse(
+        word=word,
+        confidence=round(conf, 3),
+        language=language,
     )
 
 
