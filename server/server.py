@@ -250,6 +250,8 @@ async def recognize_video(
         from keypoint_extractor import extract_from_video
         keypoints = extract_from_video(tmp_path)   # (30, 144)
         gloss, conf = model.predict(keypoints)
+        print(f"[Recognize] size={len(content)/1024:.0f}KB "
+              f"file={video.filename} -> {gloss} ({conf:.2f})")
     except Exception as e:
         raise HTTPException(500, f"Video recognition failed: {e}")
     finally:

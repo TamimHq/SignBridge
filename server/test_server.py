@@ -1,11 +1,11 @@
 import requests
 
 tests = [
-    (r"D:\project_sL\SignBD-Word\SignBD-Word_RGB\DATASET\maa\p1_c_maa.mp4", "maa"),
-    (r"D:\project_SL\SignBD-Word\SignBD-Word_RGB\DATASET\baba\p1_c_baba.mp4", "baba"),
-    (r"D:\project_sL\SignBD-Word\SignBD-Word_RGB\DATASET\valo\p1_c_valo.mp4", "valo"),
-    (r"D:\project_sL\SignBD-Word\SignBD-Word_RGB\DATASET\pakhi\p5_c_pakhi.mp4", "pakhi"),
-    (r"D:\project_sL\SignBD-Word\SignBD-Word_RGB\DATASET\maa\p7_c_maa.mp4", "maa"),
+    (r"E:\SL\SignBD-Word\SignBD-Word_RGB\DATASET\maa\p1_c_maa.mp4", "maa"),
+    (r"E:\SL\SignBD-Word\SignBD-Word_RGB\DATASET\baba\p1_c_baba.mp4", "baba"),
+    (r"E:\SL\SignBD-Word\SignBD-Word_RGB\DATASET\valo\p1_c_valo.mp4", "valo"),
+    (r"E:\SL\SignBD-Word\SignBD-Word_RGB\DATASET\pakhi\p5_c_pakhi.mp4", "pakhi"),
+    (r"E:\SL\SignBD-Word\SignBD-Word_RGB\DATASET\maa\p7_c_maa.mp4", "maa"),
 ]
 
 correct = 0

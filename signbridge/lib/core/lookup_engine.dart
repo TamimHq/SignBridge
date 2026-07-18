@@ -246,10 +246,15 @@ class SignLookupEngine {
     final glosses = _bdslIndex?['glosses'] as Map<String, dynamic>? ?? {};
 
     for (final w in gloss) {
-      // Bengali lookup with normalization
+      // 1) Bengali script lookup with normalization
       String? glossKey = _bnNormMap[bnNormalize(w)];
-      // Fallback: try English
+      // 2) Fallback: English word (e.g. "mother")
       glossKey ??= enMap[w.toLowerCase()] as String?;
+      // 3) Fallback: romanized gloss key itself (e.g. "maa", "baba", "valo")
+      final lower = w.toLowerCase();
+      if (glossKey == null && glosses.containsKey(lower)) {
+        glossKey = lower;
+      }
 
       if (glossKey != null && glosses.containsKey(glossKey)) {
         final entry = glosses[glossKey] as Map<String, dynamic>;

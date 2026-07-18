@@ -34,8 +34,6 @@ _HAND_TASK_URL = (
 )
 
 
-
-
 def _download_if_needed(url: str, filename: str) -> str:
     os.makedirs(_MODELS_CACHE, exist_ok=True)
     path = os.path.join(_MODELS_CACHE, filename)
@@ -47,8 +45,11 @@ def _download_if_needed(url: str, filename: str) -> str:
 
 
 def _build_landmarkers():
-    """Create a fresh pair of landmarkers. VIDEO mode requires timestamps to be
-    strictly increasing per instance, so we build new ones for each video."""
+    """Create a fresh pair of landmarkers.
+
+    VIDEO running mode requires strictly increasing timestamps per instance,
+    so we build new ones for each video rather than reusing globals.
+    """
     import mediapipe as mp
     from mediapipe.tasks import python as mp_python
     from mediapipe.tasks.python import vision
@@ -74,7 +75,6 @@ def _build_landmarkers():
         vision.PoseLandmarker.create_from_options(pose_opts),
         vision.HandLandmarker.create_from_options(hand_opts),
     )
-
 
 
 def _frame_vector(pose_result, hand_result) -> np.ndarray:
@@ -134,39 +134,96 @@ def normalize_keypoints(kps):
     return kps
 
 
+
+def _transcode_to_mp4(src_path: str) -> str:
+    """Convert any container (webm from browsers, mov from iOS) to H.264 mp4.
+
+    Uses the ffmpeg binary bundled with imageio-ffmpeg, so nothing needs to be
+    installed system-wide. Returns the path of the converted file.
+    """
+    import subprocess
+    import imageio_ffmpeg
+
+    ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+    dst_path = src_path + ".converted.mp4"
+    subprocess.run(
+        [
+            ffmpeg, "-y", "-loglevel", "error",
+            "-i", src_path,
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-an",
+            dst_path,
+        ],
+        check=True,
+    )
+    return dst_path
+
+
+def _read_frames(video_path: str):
+    """Read all frames of a video as BGR numpy arrays via OpenCV."""
+    import cv2
+    cap = cv2.VideoCapture(video_path)
+    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    out = []
+    while cap.isOpened():
+        ok, frame = cap.read()
+        if not ok:
+            break
+        out.append(frame)
+    cap.release()
+    return out, fps
+
 def extract_from_video(video_path: str) -> np.ndarray:
-    """Run MediaPipe Tasks over a video -> normalized (30, 144) array."""
+    """Run MediaPipe Tasks over a video -> normalized (30, 144) array.
+
+    Accepts mp4 (Android), mov (iOS) and webm (browsers). If OpenCV cannot
+    decode the container, the file is transcoded to mp4 and retried.
+    """
+    import os
     import cv2
     import mediapipe as mp
 
+    raw_frames, fps = _read_frames(video_path)
+
+    converted_path = None
+    if not raw_frames:
+        # Likely webm or another container OpenCV can't decode - transcode
+        try:
+            converted_path = _transcode_to_mp4(video_path)
+            raw_frames, fps = _read_frames(converted_path)
+        except Exception as e:
+            raise ValueError(
+                f"Could not decode video, and transcoding failed: {e}"
+            )
+
+    if not raw_frames:
+        raise ValueError("No frames could be read from the video")
+
     pose_landmarker, hand_landmarker = _build_landmarkers()
-
     try:
-        cap = cv2.VideoCapture(video_path)
-        fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
         frames = []
-        frame_idx = 0
-
-        while cap.isOpened():
-            ok, frame = cap.read()
-            if not ok:
-                break
+        for i, frame in enumerate(raw_frames):
             rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
-            ts_ms = int((frame_idx / fps) * 1000)
-
+            ts_ms = int((i / fps) * 1000)
             pose_result = pose_landmarker.detect_for_video(mp_image, ts_ms)
             hand_result = hand_landmarker.detect_for_video(mp_image, ts_ms)
-
             frames.append(_frame_vector(pose_result, hand_result))
-            frame_idx += 1
-
-        cap.release()
     finally:
         pose_landmarker.close()
         hand_landmarker.close()
+        if converted_path and os.path.exists(converted_path):
+            os.unlink(converted_path)
 
-    if not frames:
-        raise ValueError("No frames could be read from the video")
+    # ── Diagnostics: how much did MediaPipe actually see? ──
+    arr = np.array(frames, dtype=np.float32)
+    pose_ok = float(np.mean(np.any(arr[:, 0:18] != 0, axis=1)))
+    lh_ok = float(np.mean(np.any(arr[:, 18:81] != 0, axis=1)))
+    rh_ok = float(np.mean(np.any(arr[:, 81:144] != 0, axis=1)))
+    print(
+        f"[Extractor] frames={len(frames)} "
+        f"pose={pose_ok*100:.0f}% leftHand={lh_ok*100:.0f}% rightHand={rh_ok*100:.0f}%"
+    )
+    if lh_ok < 0.2 and rh_ok < 0.2:
+        print("[Extractor] WARNING: hands barely detected - check framing/lighting")
 
     return normalize_keypoints(resample_frames(frames))

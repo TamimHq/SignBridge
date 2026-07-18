@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +13,7 @@ import 'models.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 
 class ApiClient extends ChangeNotifier {
-  String _serverUrl = 'http://localhost:8000';
+  String _serverUrl = 'http://192.168.0.122:8000';
   bool _isConnected = false;
   String? _lastError;
 
@@ -23,7 +24,7 @@ class ApiClient extends ChangeNotifier {
   // ── Init ──────────────────────────────────────────────────────────────────
   Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
-    _serverUrl = prefs.getString('server_url') ?? 'http://localhost:8000';
+    _serverUrl = prefs.getString('server_url') ?? 'http://192.168.0.122:8000';
     await checkConnection();
   }
 
@@ -71,6 +72,35 @@ class ApiClient extends ChangeNotifier {
 
     if (res.statusCode != 200) {
       throw Exception('Recognize failed: ${res.statusCode}');
+    }
+
+    return SignRecognitionResult.fromJson(
+      jsonDecode(res.body) as Map<String, dynamic>,
+    );
+  }
+
+  // ── Video sign recognition (primary mobile path) ─────────────────────────
+  /// Upload a short recorded clip of one sign. Takes raw bytes so it works on
+  /// mobile, desktop AND web (web has no dart:io, so fromPath is unavailable).
+  Future<SignRecognitionResult> recognizeVideo({
+    required List<int> videoBytes,
+    required AppLanguage language,
+    String filename = 'clip.mp4',
+  }) async {
+    final request = http.MultipartRequest(
+      'POST',
+      Uri.parse('$_serverUrl/api/recognize_video'),
+    );
+    request.files.add(
+      http.MultipartFile.fromBytes('video', videoBytes, filename: filename),
+    );
+    request.fields['language'] = language.code;
+
+    final streamed = await request.send().timeout(const Duration(seconds: 60));
+    final res = await http.Response.fromStream(streamed);
+
+    if (res.statusCode != 200) {
+      throw Exception('Recognition failed (${res.statusCode}): ${res.body}');
     }
 
     return SignRecognitionResult.fromJson(
