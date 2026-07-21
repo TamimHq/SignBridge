@@ -1,14 +1,14 @@
 # =========================
+server/models/mp_models/
+signbridge/assets/bdsl_poses/
+signbridge/build/
+# =========================
 # Python
 # =========================
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Model files — too large for Git, live on Drive
-server/models/
-*.pt
-*.pth
 
 # =========================
 # OS / IDE
