@@ -249,9 +249,24 @@ async def recognize_video(
     try:
         from keypoint_extractor import extract_from_video
         keypoints = extract_from_video(tmp_path)   # (30, 144)
-        gloss, conf = model.predict(keypoints)
+
+        # Predict on both the original and horizontally-mirrored keypoints and
+        # keep the more confident result. Front cameras mirror the image, so a
+        # signer's right hand can land in the left-hand slot; this makes the
+        # endpoint robust to either orientation.
+        from keypoint_extractor import mirror_keypoints
+        gloss_a, conf_a = model.predict(keypoints)
+        gloss_b, conf_b = model.predict(mirror_keypoints(keypoints))
+        if conf_b > conf_a:
+            gloss, conf = gloss_b, conf_b
+            orientation = "mirrored"
+        else:
+            gloss, conf = gloss_a, conf_a
+            orientation = "original"
         print(f"[Recognize] size={len(content)/1024:.0f}KB "
-              f"file={video.filename} -> {gloss} ({conf:.2f})")
+              f"file={video.filename} -> {gloss} ({conf:.2f}) [{orientation}] "
+              f"(alt: {gloss_b if orientation=='original' else gloss_a} "
+              f"{conf_b if orientation=='original' else conf_a:.2f})")
     except Exception as e:
         raise HTTPException(500, f"Video recognition failed: {e}")
     finally:

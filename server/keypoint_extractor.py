@@ -227,3 +227,19 @@ def extract_from_video(video_path: str) -> np.ndarray:
         print("[Extractor] WARNING: hands barely detected - check framing/lighting")
 
     return normalize_keypoints(resample_frames(frames))
+
+def mirror_keypoints(kps: np.ndarray) -> np.ndarray:
+    """Horizontally mirror a (30, 144) keypoint array.
+
+    Flips x coordinates and swaps the left/right hand blocks — identical to the
+    aug_mirror used during training, so mirrored input stays in-distribution.
+    """
+    k = kps.copy()
+    n_points = FEATURE_DIM // 3
+    for i in range(n_points):
+        k[:, i * 3] = -k[:, i * 3]
+    lh = k[:, 18:81].copy()
+    rh = k[:, 81:144].copy()
+    k[:, 18:81] = rh
+    k[:, 81:144] = lh
+    return k
