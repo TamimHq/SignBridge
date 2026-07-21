@@ -106,10 +106,20 @@ class _SignerPanelState extends State<SignerPanel> {
         _recording = false;
         _processing = false;
       });
+      // ASL recognition is intentionally not enabled: the available ASL data
+      // (How2Sign continuous clips) can't train a reliable word classifier.
+      // Text -> ASL avatar still works. Show a clear message instead of a
+      // raw server error.
+      final msg = e.toString().contains('503')
+          ? 'Sign recognition isn\'t available for ASL yet — '
+                'switch to BdSL, or type to see the ASL avatar sign.'
+          : 'Recognition failed: $e';
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Recognition failed: $e'),
+          content: Text(msg),
           backgroundColor: AppColors.surface2,
+          duration: const Duration(seconds: 4),
         ),
       );
     }
